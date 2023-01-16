@@ -1,0 +1,64 @@
+<html>
+<head>
+  <!-- load appetize sdk -->
+  <script>
+    !function(b,c,d,a,e,f){a=new Promise(function(g){b[d]={getClient:function(h){
+      return e||((e=document.createElement(c)).src="https://js.appetize.io/embed.js",
+      e.async=1,(f=document.getElementsByTagName(c)[0]).parentNode.insertBefore(e,f),
+      e.onload=function(){g(b[d].getClient(h))}),a}}})}(window,"script","appetize")
+    </script>
+  </head>
+  
+  <body>
+    <iframe id="appetize" src="https://appetize.io/embed/<PUBLIC KEY>?scale=auto" width="400" height="500" frameborder="0"></iframe> 
+    <br />
+    <button onclick="saveVideo()">
+      Save Video
+    </button>
+    
+    <script>      
+      let h264Frames = []
+      
+      // when session starts, begin storing h264 frames
+      appetize.getClient("#appetize").then(client => {
+        client.on('session', session => {
+          h264Frames = []
+
+          session.on('video', data => {
+            h264Frames.push(data.buffer)
+          })
+        })
+      })
+
+      async function saveVideo() {        
+        
+        // send h264 frames to server to be converted to mp4
+        const formData = new FormData()
+        formData.append('file', new Blob(h264Frames))
+
+        const response = await fetch('/save-video', {
+          method: 'POST',
+          body: formData
+        })
+        
+        const reader = response.body.getReader()
+
+        // parse response.body as mp4 file
+        let result = await reader.read()
+        let bytes = new Uint8Array(result.value)
+        const blob = new Blob([bytes], {type: 'video/mp4'})
+      
+        // save file
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = 'recording.mp4'
+        a.click()
+
+        // clean up
+        URL.revokeObjectURL(url)
+        a.remove()        
+      }      
+    </script>
+  </body>
+</html>

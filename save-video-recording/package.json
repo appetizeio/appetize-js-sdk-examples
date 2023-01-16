@@ -1,0 +1,17 @@
+{
+  "name": "save-video-recording",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jmuxer": "^2.0.5",
+    "multer": "^1.4.5-lts.1"
+  }
+}
