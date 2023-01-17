@@ -1,0 +1,63 @@
+<html>
+<head>
+  <!-- load appetize sdk -->
+  <script>
+    !function(b,c,d,a,e,f){a=new Promise(function(g){b[d]={getClient:function(h){
+      return e||((e=document.createElement(c)).src="https://js.appetize.io/embed.js",
+      e.async=1,(f=document.getElementsByTagName(c)[0]).parentNode.insertBefore(e,f),
+      e.onload=function(){g(b[d].getClient(h))}),a}}})}(window,"script","appetize")
+    </script>
+  </head>
+  
+  <body style="padding: 8px;">
+    <iframe id="appetize" src="https://appetize.io/embed/demo?scale=auto" width="400" height="500" frameborder="0"></iframe> 
+    <br />
+    <br />
+
+    <button onclick="playback()">
+      Restart app & replay actions
+    </button>
+
+    <h2>Actions</h2>
+    <pre id="actions" style="overflow: scroll;">
+Recorded actions will appear here. 
+Start the session, use the app, and then click "Playback" to see the actions replayed.
+    </pre>
+
+    <script>
+      let session = null      
+      let actions = []
+
+      appetize.getClient("#appetize").then(client => {
+
+        // when session starts, begin storing actions
+        client.on('session', newSession => {
+          session = newSession
+
+          session.on('action', action => {            
+              actions.push(action)              
+              document.getElementById('actions').innerText = JSON.stringify(actions, null, 2)                      
+          })
+
+          session.on('end', () => {
+            actions = []
+            document.getElementById('actions').innerText = ''
+            session = null          
+          })
+        })
+      })
+
+      async function playback() {
+        if (session) {
+          // reinstall app to reset the state. Not required, but for purposes
+          // of this example we want to start fresh each time.
+          await session.reinstallApp()
+
+          console.log('Playing back actions: ', actions)
+          await session.playActions(actions)
+          console.log('Playback complete')
+        }
+      }
+    </script>
+  </body>
+</html>
