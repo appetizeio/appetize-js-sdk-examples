@@ -1,0 +1,16 @@
+{
+    "name": "playwright-testing",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "playwright test"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@appetize/playwright": "^0.1.3",
+        "@playwright/test": "^1.29.2"
+    }
+}
