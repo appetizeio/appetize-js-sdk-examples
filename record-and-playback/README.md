@@ -1,4 +1,4 @@
-# Record and Playback
+# Record and Playback Example
 
 Demonstrates how to record and playback user actions on your app.
 

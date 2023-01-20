@@ -1,4 +1,4 @@
-# Save Video Recording
+# Save Video Recording Example
 
 Demonstrates how to mux an Appetize.io h264 stream into an mp4 file using [jmuxer](https://github.com/samirkumardas/jmuxer) and [express](https://expressjs.com/).
 
