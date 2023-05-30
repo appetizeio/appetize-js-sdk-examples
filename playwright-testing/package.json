@@ -4,14 +4,15 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "playwright test"
+        "test": "playwright test --headed",
+        "test:ci": "playwright test"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@appetize/playwright": "latest",
-        "@playwright/test": "latest"
+        "@appetize/playwright": "^1.0.0",
+        "@playwright/test": "1.33.0"
     },
     "devDependencies": {
         "@types/node": "^18.0.0"
