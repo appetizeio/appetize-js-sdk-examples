@@ -10,13 +10,13 @@ Clone the repo and npm install
 npx degit appetizeio/appetize-js-sdk-examples/playwright-testing playwright-testing
 cd playwright-testing
 npm install
-npm run start
+npx playwright install
 ```
 
 Then run the tests
 
 ```bash
-npm run test -- --headed
+npm run test
 ```
 
 [Check out the docs](https://docs.appetize.io/javascript-sdk/playwright) to see how else you can
