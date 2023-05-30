@@ -11,8 +11,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@appetize/playwright": "^0.4.0-beta.10",
-        "@playwright/test": "latest"
+        "@appetize/playwright": "^1.0.0",
+        "@playwright/test": "1.33.0"
     },
     "devDependencies": {
         "@types/node": "^18.0.0"

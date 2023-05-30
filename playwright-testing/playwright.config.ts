@@ -19,13 +19,13 @@ const config = {
     
     use: {    
         trace: 'retain-on-failure',
-        baseURL: 'https://test.appetize.io',
+        baseURL: 'https://appetize.io',
         
         // Appetize session configuration
         config: {
             publicKey: 'demo',
-            device: 'iphone14pro',
-            osVersion: '16',                        
+            device: 'iphone13pro',
+            osVersion: '16',           
             location: [37.37750, -122.06750] // Silicon Valley
         }    
     },

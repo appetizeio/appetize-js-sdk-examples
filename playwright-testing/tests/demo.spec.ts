@@ -1,5 +1,6 @@
 import { test, expect } from '@appetize/playwright';
 
+// see playwright.config.ts for session configuration
 test('goes to Places tab and shows current location on map', async ({
     session,
 }) => {
@@ -22,7 +23,7 @@ test('goes to Places tab and shows current location on map', async ({
             },
         }, 
         {
-            // select the first element that matches the query
+            // select the first element that matches the selector
             matchIndex: 0
         }
     );
@@ -35,9 +36,17 @@ test('goes to Places tab and shows current location on map', async ({
             }
         },
     });
+
+    // tap button that recenters map on current location
+    await session.tap({
+        element: {
+            attributes: {
+                accessibilityLabel: 'Recenter on your location'
+            }
+        }
+    })
     
     // assert that current location is shown on map    
-    // (location of device is set in playwright.config.ts)
     await expect(session).toHaveElement({ 
         attributes: { 
             text: 'Silicon Valley' 
